@@ -50,7 +50,7 @@ const Todo = ({ addToDos, todo, deleteToDos, editToDos, toggleComplete }) => {
         {todo.map((item, index) => (
           <div className="todolist" key={index}>
             <div className="firstpart">
-              {item.completed ? (
+              {editingIndex === index ? null : item.completed ? (
                 <CgCheck
                   size={30}
                   style={{
