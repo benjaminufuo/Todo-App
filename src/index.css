@@ -20,6 +20,7 @@
   border-radius: 8px;
   padding: 30px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
 }
 
 .todoheader {
@@ -79,22 +80,21 @@ button {
   cursor: pointer;
 }
 .savebtn {
-  padding-inline: 30px;
-  padding-block: 15px;
-  background-color: #06d6a0;
+  color: #06d6a0;
   border: none;
   outline: none;
   border-radius: 30px;
-  color: #ffffff;
-  font-size: 16px;
+  font-size: 22px;
   font-weight: 600;
   cursor: pointer;
 }
 
 .todolistitem {
   width: 100%;
+  height: auto;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 }
 .todolist {
   width: 100%;
@@ -103,8 +103,16 @@ button {
   justify-content: space-between;
   align-items: center;
 }
+.editsection {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
 .firstpart {
+  width: 100%;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -124,7 +132,6 @@ button {
     border-radius: 8px;
     padding: 30px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    overflow-y: auto;
   }
 
   input {

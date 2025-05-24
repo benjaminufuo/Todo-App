@@ -4,6 +4,7 @@ import { FiCircle } from "react-icons/fi";
 import { SlOptions } from "react-icons/sl";
 import { RiEditFill } from "react-icons/ri";
 import { MdDeleteSweep } from "react-icons/md";
+import { MdOutlineSaveAlt } from "react-icons/md";
 import { useEffect, useState } from "react";
 
 const Todo = ({ addToDos, todo, deleteToDos, editToDos, toggleComplete }) => {
@@ -68,25 +69,34 @@ const Todo = ({ addToDos, todo, deleteToDos, editToDos, toggleComplete }) => {
               )}
               {editingIndex === index ? (
                 <>
-                  <input
-                    type="text"
-                    value={editInput}
-                    onChange={(e) => setEditInput(e.target.value)}
-                  />
-                  <button
-                    className="savebtn"
-                    onClick={() => {
-                      if (editInput.trim() !== "") {
-                        editToDos(index, {
-                          ...todo[index],
-                          text: editInput.trim(),
-                        });
-                        setEditingIndex(null);
-                      }
-                    }}
-                  >
-                    save
-                  </button>
+                  <div className="editsection">
+                    <input
+                      className="editinput"
+                      type="text"
+                      value={editInput}
+                      onChange={(e) => setEditInput(e.target.value)}
+                    />
+                    <MdOutlineSaveAlt
+                      className="savebtn"
+                      onClick={() => {
+                        if (editInput.trim() !== "") {
+                          if (
+                            window.confirm(
+                              "Are you sure you want to save changes to this todo"
+                            )
+                          ) {
+                            {
+                              editToDos(index, {
+                                ...todo[index],
+                                text: editInput.trim(),
+                              });
+                              setEditingIndex(null);
+                            }
+                          }
+                        }
+                      }}
+                    />
+                  </div>
                 </>
               ) : (
                 <span
@@ -103,7 +113,7 @@ const Todo = ({ addToDos, todo, deleteToDos, editToDos, toggleComplete }) => {
               )}
             </div>
             <div className="delete" />
-            {showIndex === index ? (
+            {editingIndex === index ? null : showIndex === index ? (
               <div
                 className="deleteEditIcons"
                 onMouseLeave={() => setShowIndex(null)}
@@ -118,7 +128,15 @@ const Todo = ({ addToDos, todo, deleteToDos, editToDos, toggleComplete }) => {
                   style={{ cursor: "pointer" }}
                 />
                 <MdDeleteSweep
-                  onClick={() => deleteToDos(index)}
+                  onClick={() => {
+                    if (
+                      window.confirm(
+                        "Are you sure you want to delete this todo?"
+                      )
+                    ) {
+                      deleteToDos(index);
+                    }
+                  }}
                   style={{ cursor: "pointer" }}
                   size={20}
                   color="red"
