@@ -4,7 +4,7 @@ import { FiCircle } from "react-icons/fi";
 import { SlOptions } from "react-icons/sl";
 import { RiEditFill } from "react-icons/ri";
 import { MdDeleteSweep } from "react-icons/md";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Todo = ({ addToDos, todo, deleteToDos, editToDos, toggleComplete }) => {
   const [showIndex, setShowIndex] = useState(null);
@@ -17,6 +17,8 @@ const Todo = ({ addToDos, todo, deleteToDos, editToDos, toggleComplete }) => {
       setInput("");
     }
   };
+
+  useEffect(() => {}, []);
   return (
     <section className="todomain">
       <div className="todoheader">
@@ -29,10 +31,19 @@ const Todo = ({ addToDos, todo, deleteToDos, editToDos, toggleComplete }) => {
           placeholder="add your task here"
           value={input}
           onChange={(e) => {
-            setInput(e.target.value), console.log(input);
+            setInput(e.target.value);
           }}
+          disabled={editingIndex !== null}
         />
-        <button onClick={handleAdd}>Add</button>
+        <button
+          onClick={handleAdd}
+          disabled={editingIndex !== null}
+          style={{
+            backgroundColor: editingIndex !== null ? "grey" : "#fc5744",
+          }}
+        >
+          Add
+        </button>
       </div>
       <div className="todolistitem">
         {todo.map((item, index) => (

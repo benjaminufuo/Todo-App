@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Todo from "./assets/components/Todo";
 
 const App = () => {
-  const [todo, setTodo] = useState([]);
+  const [todo, setTodo] = useState(() => {
+    const storedData = localStorage.getItem("todos");
+    return storedData ? JSON.parse(storedData) : [];
+  });
   const addToDos = (newTodo) => {
     setTodo([...todo, { text: newTodo, completed: false }]);
   };
@@ -20,6 +23,18 @@ const App = () => {
       )
     );
   };
+
+  // useEffect(() => {
+  //   const storedData = localStorage.getItem("todos");
+  //   if (storedData) {
+  //     console.log("Loaded todos:", JSON.parse(storedData));
+  //     setTodo(JSON.parse(storedData));
+  //   }
+  // }, []);
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todo));
+  }, [todo]);
   return (
     <div className="App">
       <Todo
