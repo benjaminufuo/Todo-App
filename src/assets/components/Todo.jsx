@@ -35,6 +35,7 @@ const Todo = ({ addToDos, todo, deleteToDos, editToDos, toggleComplete }) => {
             setInput(e.target.value);
           }}
           disabled={editingIndex !== null}
+          maxLength={15}
         />
         <button
           onClick={handleAdd}
@@ -71,10 +72,11 @@ const Todo = ({ addToDos, todo, deleteToDos, editToDos, toggleComplete }) => {
                 <>
                   <div className="editsection">
                     <input
-                      className="editinput"
                       type="text"
                       value={editInput}
                       onChange={(e) => setEditInput(e.target.value)}
+                      maxLength={15}
+                      placeholder="Edit task"
                     />
                     <MdOutlineSaveAlt
                       className="savebtn"
